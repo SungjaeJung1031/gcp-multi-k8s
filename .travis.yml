@@ -13,13 +13,13 @@ before_install:
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project gcp-multi-k8s
-  - gcloud cofig set compute/zone asia-east1-a
+  - gcloud config set compute/zone asia-east1-a
   - gcloud container clusters get-credentials multi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t jsungjei/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true USERNAME/docker-react npm run test
+  - docker run -e CI=true jsungjei/docker-react npm run test
 
 deploy:
   provider: script
